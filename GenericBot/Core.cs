@@ -96,15 +96,12 @@ namespace GenericBot
             Commands.AddRange(new ConfigModule().Load());
             Commands.AddRange(new CustomCommandModule().Load());
             Commands.AddRange(new GetGuildModule().Load());
-            Commands.AddRange(new GiveawayModule().Load());
-            Commands.AddRange(new ImageModule().Load());
             Commands.AddRange(new InfoModule().Load());
             Commands.AddRange(new LookupModule().Load());
             Commands.AddRange(new MemeModule().Load());
             Commands.AddRange(new MuteModule().Load());
             Commands.AddRange(new PointsModule().Load());
             Commands.AddRange(new QuickCommands().GetQuickCommands());
-            Commands.AddRange(new QuoteModule().Load());
             Commands.AddRange(new RoleModule().Load());
             Commands.AddRange(new SocialModule().Load());
             Commands.AddRange(new WarningModule().Load());

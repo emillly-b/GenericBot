@@ -54,19 +54,6 @@ namespace GenericBot.CommandModules
             };
             commands.Add(ping);
 
-            Command donate = new Command("donate");
-            donate.WorksInDms = true;
-            donate.Description = "Provides info on how to donate!";
-            donate.ToExecute += async (context) =>
-            {
-                await context.Message.ReplyAsync("If you'd like to help keep GenericBot running and getting better, there are several ways you can donate to help out!\n\n" +
-                    "**Patreon:** <https://www.patreon.com/mastrchefrocks>\n" +
-                    "**Ko-Fi:** <https://www.ko-fi.com/mastrchefrocks>\n" +
-                    "If none of these work for you, send me a DM and we'll see what can be done!\n\n" +
-                    "Thank you for your support!");
-            };
-            commands.Add(donate);
-
             Command info = new Command("info");
             info.WorksInDms = true;
             info.Description = "Provides some general info about the bot";
