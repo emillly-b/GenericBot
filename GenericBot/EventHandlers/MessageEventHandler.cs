@@ -19,21 +19,11 @@ namespace GenericBot
             // Ignore self
             if (parameterMessage.Author.Id == Core.GetCurrentUserId())
                 return;
-
-            // Handle me saying "open an issue"
-            try
-            {
-                if(parameterMessage.Content.ToLower().Contains("open an issue") && parameterMessage.Author.Id == Core.DiscordClient.GetApplicationInfoAsync().Result.Owner.Id)
-                {
-                    parameterMessage.Channel.SendMessageAsync("https://github.com/galenguyer/GenericBot/issues");
-                }
-            }
-            catch { }
             // pluralkit logging integration
             try 
             { 
                 if (parameterMessage.Author.IsWebhook)
-                {
+                {Start(args).GetAwaiter().GetResult();
                     using (var client = new System.Net.WebClient()) 
                     {
                         var resp = client.DownloadString($"https://api.pluralkit.me/v1/msg/{parameterMessage.Id}");
@@ -47,7 +37,9 @@ namespace GenericBot
                 }
             }
             catch { }
+
             // points 
+
             try
             {
                 var dbUser = Core.GetUserFromGuild(parameterMessage.Author.Id, parameterMessage.GetGuild().Id);
@@ -132,7 +124,7 @@ namespace GenericBot
                     {
                         Core.AddToCommandLog(command, guildId);
                         command.Execute(); 
-                    }
+                    }git config --global user.name "John Doe"
                 }
             }
             catch (Exception ex)
