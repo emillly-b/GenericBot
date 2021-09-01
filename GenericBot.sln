@@ -5,8 +5,6 @@ VisualStudioVersion = 16.0.30002.166
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GenericBot", "GenericBot\GenericBot.csproj", "{11C1304B-D47F-4D5E-9878-5FD95F131303}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharperMark", "SharperMark\SharperMark.csproj", "{852534B5-BD02-41F7-937D-FFEB97EDBF94}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
