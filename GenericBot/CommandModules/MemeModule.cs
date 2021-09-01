@@ -14,6 +14,7 @@ namespace GenericBot.CommandModules
         {
             List<Command> commands = new List<Command>();
             
+            #region "UWU Command"
             Command uwu = new Command("uwu");
             uwu.WorksInDms = true;
             uwu.Description = "Uwu-ify text";
@@ -36,6 +37,20 @@ namespace GenericBot.CommandModules
                 await context.Message.ReplyAsync(uwuified);
             };
             commands.Add(uwu);
+            #endregion
+
+            #region "Testing Command"
+            
+            Command TestCommand = new Command("test");
+            TestCommand.Description = "Does stuff i guess?";
+            TestCommand.Usage = "test";
+            TestCommand.Delete = true;
+            TestCommand.ToExecute += async (context) =>
+            {
+                await context.Message.ReplyAsync("This is a test, Eli is gay.");
+            };
+            commands.Add(TestCommand);
+            #endregion
 
             return commands;
         }
