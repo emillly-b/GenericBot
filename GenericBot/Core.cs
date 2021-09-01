@@ -241,39 +241,6 @@ namespace GenericBot
             DatabaseEngine.DeleteCustomCommand(name, guildId);
         }
 
-        public static Quote AddQuote(string quote, ulong guildId) =>
-            DatabaseEngine.AddQuote(quote, guildId);
-        public static bool RemoveQuote(int id, ulong guildId) =>
-            DatabaseEngine.RemoveQuote(id, guildId);
-
-        /// <summary>
-        /// Retrieve a quote from the database. 
-        /// If no string is provided, a random quote is returned.
-        /// If a number is provided, the quote with that ID is attempted to be returned.
-        /// Otherwise, a plaintext search is performed and a random matching quote is returned.
-        /// </summary>
-        /// <param name="quote"></param>
-        /// <param name="guildId"></param>
-        /// <returns></returns>
-        public static Quote GetQuote(string quote, ulong guildId)
-        {
-            var quotes = GetAllQuotes(guildId);
-
-            if (string.IsNullOrEmpty(quote))
-            {
-                return quotes.GetRandomItem();
-            }
-            else if (int.TryParse(quote, out int id) && id <= quotes.Max(q => q.Id))
-            {
-                return quotes.Any(q => q.Id == id) ? quotes.Find(q => q.Id == id) : new Quote("Not Found", 0);
-            }
-            else
-            {
-                var foundQuotes = quotes.Where(q => q.Content.ToLower().Contains(quote.ToLower())).ToList();
-                return foundQuotes.Any() ? foundQuotes.GetRandomItem() : new Quote("Not Found", 0);
-            }
-        }
-
         public static DatabaseUser SaveUserToGuild(DatabaseUser user, ulong guildId, bool log = true) =>
             DatabaseEngine.SaveUserToGuild(user, guildId, log);
         public static DatabaseUser GetUserFromGuild(ulong userId, ulong guildId, bool log = true) =>
@@ -321,14 +288,6 @@ namespace GenericBot
         /// <param name="guildId"></param>
         public static void AddVerificationEvent(ulong userId, ulong guildId) =>
             DatabaseEngine.AddVerification(userId, guildId);
-
-        /// <summary>
-        /// Get all quotes from the database for a guild
-        /// </summary>
-        /// <param name="guildId"></param>
-        /// <returns></returns>
-        public static List<Quote> GetAllQuotes(ulong guildId) =>
-            DatabaseEngine.GetAllQuotes(guildId);
 
         /// <summary>
         /// Add or update an ExceptionReport to the database, and open an issue on GitHub if possible

@@ -162,56 +162,6 @@ namespace GenericBot.Database
                 _collection.DeleteOne(u => u.Id == banId);
         }
 
-        ///<inheritdoc cref="IDatabaseEngine.AddQuote(string, ulong)"/>
-        public Quote AddQuote(string quote, ulong guildId)
-        {
-            Core.Logger.LogGenericMessage($"[Mongo] SAVED Quote TO {guildId}");
-
-            var _userDb = GetDatabaseFromGuildId(guildId);
-            var _collection = _userDb.GetCollection<Quote>("quotes");
-
-            var q = new Quote
-            {
-                Content = quote,
-                Id = _collection.CountDocuments(new BsonDocument()) == 0 ? 1 : (int)_collection.CountDocuments(new BsonDocument()) + 1,
-                Active = true
-            };
-            _collection.InsertOne(q);
-
-            return q;
-        }
-
-        ///<inheritdoc cref="IDatabaseEngine.RemoveQuote(int, ulong)"/>
-        public bool RemoveQuote(int id, ulong guildId)
-        {
-            Core.Logger.LogGenericMessage($"[Mongo] DELETE Quote {id} FROM {guildId}");
-
-            var _userDb = GetDatabaseFromGuildId(guildId);
-            var _collection = _userDb.GetCollection<Quote>("quotes");
-
-            try
-            {
-                _collection.UpdateOne(new BsonDocument("_id", id), Builders<Quote>.Update.Set("Active", false));
-                return true;
-            }
-            catch (Exception ex)
-            {
-                Core.Logger.LogErrorMessage(ex, null);
-                return false;
-            }
-        }
-
-        ///<inheritdoc cref="IDatabaseEngine.GetAllQuotes(ulong)"/>
-        public List<Quote> GetAllQuotes(ulong guildId)
-        {
-            Core.Logger.LogGenericMessage($"[Mongo] GOT AllQuotes FROM {guildId}");
-
-            var _userDb = GetDatabaseFromGuildId(guildId);
-            var _collection = _userDb.GetCollection<Quote>("quotes");
-
-            return _collection.Find(new BsonDocument("Active", true)).ToList();
-        }
-
         ///<inheritdoc cref="IDatabaseEngine.AddToAuditLog(ParsedCommand, ulong)"/>
         public void AddToAuditLog(ParsedCommand command, ulong guildId)
         {

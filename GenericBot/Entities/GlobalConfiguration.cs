@@ -67,7 +67,7 @@ namespace GenericBot.Entities
         /// </summary>
         /// <param name="filePath">Optionally set a location for the config</param>
         /// <returns></returns>
-        public GlobalConfiguration Load(string filePath = "./files/config.json")
+        public GlobalConfiguration Load(string filePath = "./files/realconfig.json")
         {
             if (!File.Exists(filePath))
             {
@@ -92,7 +92,7 @@ namespace GenericBot.Entities
             }
         }
         
-        public GlobalConfiguration Save(string filePath = "./files/config.json")
+        public GlobalConfiguration Save(string filePath = "./files/realconfig.json")
         {
             File.WriteAllText(filePath, JsonConvert.SerializeObject(this, Formatting.Indented));
             return this;

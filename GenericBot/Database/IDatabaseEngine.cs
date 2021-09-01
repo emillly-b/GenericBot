@@ -108,29 +108,6 @@ namespace GenericBot.Database
         /// <param name="quote"></param>
         /// <param name="guildId"></param>
         /// <returns></returns>
-        public Quote AddQuote(string quote, ulong guildId);
-
-        /// <summary>
-        /// Update a <see cref="Quote"/>'s Active field to be inactive, using the Quote's Id field for identification
-        /// </summary>
-        /// <param name="id"></param>
-        /// <param name="guildId"></param>
-        /// <returns></returns>
-        public bool RemoveQuote(int id, ulong guildId);
-
-        /// <summary>
-        /// Retrieve all <see cref="Quote"/>s from a guild's database
-        /// </summary>
-        /// <param name="guildId"></param>
-        /// <returns></returns>
-        public List<Quote> GetAllQuotes(ulong guildId);
-
-        // TODO: use AuditCommand instead of ParsedCommand 
-        /// <summary>
-        /// Add a <see cref="ParsedCommand"/> to a guild's database, without any deduplication
-        /// </summary>
-        /// <param name="command"></param>
-        /// <param name="guildId"></param>
         public void AddToAuditLog(ParsedCommand command, ulong guildId);
 
         /// <summary>

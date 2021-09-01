@@ -306,3 +306,4 @@ $RECYCLE.BIN/
 *.bat
 
 GenericBot/files/config.json
+files/realconfig.json

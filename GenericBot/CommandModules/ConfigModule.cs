@@ -818,18 +818,6 @@ namespace GenericBot.CommandModules
                         System.Threading.Thread.Sleep(1);
                     }
                     Console.WriteLine("Dumped users");
-                    // Quotes
-                    try
-                    {
-                        File.WriteAllText($"dunp/{guildid}-quotes.json", JsonConvert.SerializeObject(Core.GetAllQuotes(ulong.Parse(guildid)), Formatting.Indented));
-                        //Console.WriteLine(JsonConvert.SerializeObject(Core.GetAllQuotes(ulong.Parse(guildid)), Formatting.Indented));
-                    }
-                    catch (Exception ex)
-                    {
-                        Console.WriteLine($"Exception {ex.Message} occured dumping quotes for {guildid}\n{ex.StackTrace}");
-                        System.Threading.Thread.Sleep(1);
-                    }
-                    Console.WriteLine("Dumped quotes");
                     // Giveaways
                     try
                     {
