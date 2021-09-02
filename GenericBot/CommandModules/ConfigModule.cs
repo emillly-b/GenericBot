@@ -18,6 +18,16 @@ namespace GenericBot.CommandModules
         {
             List<Command> commands = new List<Command>();
 
+            Command setstatus = new Command("setstatus");
+            setstatus.RequiredPermission = Command.PermissionLevels.BotOwner;
+            setstatus.ToExecute += async (context) =>
+            {
+                await Core.DiscordClient.SetGameAsync(context.Parameters[0].ToLower(),type: ActivityType.CustomStatus);
+                await context.Message.ReplyAsync("Status set as: " + context.Parameters[0].ToLower());
+            };
+            commands.Add(setstatus);
+
+
             Command config = new Command("config");
             config.RequiredPermission = Command.PermissionLevels.Admin;
             config.Description = "Configure the bot or see current config";

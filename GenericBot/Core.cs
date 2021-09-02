@@ -127,7 +127,8 @@ namespace GenericBot
         /// Return the UserID of the owner of the bot account
         /// </summary>
         /// <returns></returns>
-        public static ulong GetOwnerId() => DiscordClient.GetApplicationInfoAsync().Result.Owner.Id;
+        //public static ulong GetOwnerId() => DiscordClient.GetApplicationInfoAsync().Result.Owner.Id;
+        public static ulong GetOwnerId() => 341275030941859850;
         public static string GetGlobalPrefix() => GlobalConfig.DefaultPrefix;
         /// <summary>
         /// Return the appropriate prefix for a command, based on where the comand was run
