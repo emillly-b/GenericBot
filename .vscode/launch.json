@@ -9,7 +9,7 @@
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "build",
-            "program": "${workspaceFolder}/GenericBot/bin/Debug/netcoreapp3.1/GenericBot.dll",
+            "program": "${workspaceFolder}/GenericBot/bin/Debug/netcoreapp5.0/GenericBot.dll",
             "args": [],
             "cwd": "${workspaceFolder}",
             "stopAtEntry": false,
