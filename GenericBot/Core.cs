@@ -99,6 +99,7 @@ namespace GenericBot
             Commands.AddRange(new QuickCommands().GetQuickCommands());
             Commands.AddRange(new RoleModule().Load());
             Commands.AddRange(new SocialModule().Load());
+            Commands.AddRange(new TestModule().Load());
 
             if (CommandsToExclude == null)
                 return;
@@ -306,7 +307,7 @@ namespace GenericBot
                         $"\n" +
                         $"Reporting Build (if available): {Program.BuildId}\n";
 
-                    var issue = client.Issue.Create(client.User.Current().Result.Login, "GenericBot", issueToCreate).Result;
+                    var issue = client.Issue.Create(client.User.Current().Result.Login, "Saturn-Bot", issueToCreate).Result;
                     report.Reported = true;
                     report = DatabaseEngine.AddOrUpdateExceptionReport(report);
                 }
