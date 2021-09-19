@@ -55,13 +55,12 @@ namespace GenericBot
             string message = $"[Error] {DateTime.UtcNow.ToString(@"yyyy-MM-dd_HH-mm")}: {exception}";
             Console.WriteLine(message);
             File.AppendAllText($"files/sessions/{SessionId.Substring(0, 8)}.log", message + "\n");
+            ExceptionReport report = Core.AddOrUpdateExceptionReport(new ExceptionReport(exception));
 
             if (!string.IsNullOrEmpty(Core.GlobalConfig.CriticalLoggingWebhookUrl))
             {
+
                 var webhook = new Discord.Webhook.DiscordWebhookClient(Core.GlobalConfig.CriticalLoggingWebhookUrl);
-
-                ExceptionReport report = Core.AddOrUpdateExceptionReport(new ExceptionReport(exception));
-
                 var builder = new EmbedBuilder()
                     .WithColor(255, 0, 0)
                     .WithCurrentTimestamp()
@@ -93,8 +92,9 @@ namespace GenericBot
                     .WithName("Reported")
                     .WithValue(report.Reported)
                     .WithIsInline(true));
-
+                    
                 webhook.SendMessageAsync("", embeds: new List<Embed> { builder.Build() });
+
             }
 
             return Task.FromResult(1);
