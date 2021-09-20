@@ -61,8 +61,10 @@ namespace GenericBot.Entities
         public string OAuthClientSecret { get; set; }
         public string CallbackUri { get; set; }
 
+        //Amount of times an exception needs to be thrown for a github issue to be started.
+        public int GitHubIssueCount { get; set; }
         /// <summary>
-        /// Load the config file if it exists, otherwise create a blank one and save it
+        /// Load the config file if it exists, otherwise create a blank one and save itwein
         /// for the user to edit
         /// </summary>
         /// <param name="filePath">Optionally set a location for the config</param>

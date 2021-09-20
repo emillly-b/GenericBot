@@ -297,7 +297,7 @@ namespace GenericBot
             {
                 Logger.LogGenericWarningMessage("Failed to report error to webhook or github!");
             }
-            if (!report.Reported && report.Count >= 5 && !string.IsNullOrEmpty(GlobalConfig.GithubToken))
+            if (!report.Reported && report.Count >= GlobalConfig.GitHubIssueCount && !string.IsNullOrEmpty(GlobalConfig.GithubToken))
             {
                 try
                 {
