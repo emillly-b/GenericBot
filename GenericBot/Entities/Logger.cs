@@ -40,6 +40,14 @@ namespace GenericBot
                 Environment.Exit(1);
             return Task.FromResult(1);
         }
+        public Task LogGenericWarningMessage(string msg)
+        {
+            Console.ForegroundColor = ConsoleColor.DarkRed;
+            string message = $"[Warning] {DateTime.UtcNow.ToString(@"yyyy-MM-dd_HH-mm")}: {msg}";
+            Console.WriteLine(message);
+            File.AppendAllText($"files/sessions/{SessionId}.log", message + "\n");
+            return Task.FromResult(1);
+        }
 
         public Task LogGenericMessage(string msg)
         {
