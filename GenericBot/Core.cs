@@ -64,7 +64,7 @@ namespace GenericBot
             DiscordClient.UserLeft += UserEventHandler.UserLeft;
             DiscordClient.UserUpdated += UserEventHandler.UserUpdated;
             DiscordClient.GuildAvailable += GuildEventHandler.GuildLoaded;
-            DiscordClient.ShardReady += ShardReady;
+            DiscordClient.ShardReady += ShardReady;            
         }
 
         /// <summary>
@@ -100,6 +100,7 @@ namespace GenericBot
             Commands.AddRange(new RoleModule().Load());
             Commands.AddRange(new SocialModule().Load());
             Commands.AddRange(new TestModule().Load());
+            Commands.AddRange(new AirLockmodule().Load());
 
             if (CommandsToExclude == null)
                 return;

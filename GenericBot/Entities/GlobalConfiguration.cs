@@ -63,9 +63,10 @@ namespace GenericBot.Entities
 
         //Amount of times an exception needs to be thrown for a github issue to be started.
         public int GitHubIssueCount { get; set; }
-
-        public bool OwnerOnly {get; set; }
         
+        //Toggle to ensure commands are only processed by the owner
+        public bool OwnerOnly {get; set; }
+
         /// <summary>
         /// Load the config file if it exists, otherwise create a blank one and save itwein
         /// for the user to edit

@@ -17,7 +17,7 @@ namespace GenericBot
             // Check if the message was sent from ourselves, if so disregard the message.
             if (parameterMessage.Author.Id == Core.GetCurrentUserId())
                 return;
-
+            
             #region PluralKit Integration
             try 
             { 
