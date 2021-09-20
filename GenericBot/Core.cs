@@ -293,13 +293,16 @@ namespace GenericBot
         public static ExceptionReport AddOrUpdateExceptionReport(ExceptionReport report)
         {
             report = DatabaseEngine.AddOrUpdateExceptionReport(report);
-
+            if(!report.Reported && report.Count > 5)
+            {
+                Logger.LogGenericWarningMessage("Failed to report error to webhook or github!");
+            }
             if (!report.Reported && report.Count >= 5 && !string.IsNullOrEmpty(GlobalConfig.GithubToken))
             {
                 try
                 {
                     var githubTokenAuth = new Credentials(GlobalConfig.GithubToken);
-                    var client = new GitHubClient(new ProductHeaderValue("GenericBot"));
+                    var client = new GitHubClient(new ProductHeaderValue("Saturn-Bot"));
                     client.Credentials = githubTokenAuth;
                     var issueToCreate = new NewIssue($"AUTOMATED: {report.Message}");
                     issueToCreate.Body = $"Stacktrace:\n" +
@@ -313,7 +316,7 @@ namespace GenericBot
                 }
                 catch (Exception ex)
                 {
-                    Logger.LogGenericMessage("An error occured reporting to github. Please check your credentials and that there is a repo \"GenericBot\" associated with your account.");
+                    Logger.LogGenericMessage("An error occured reporting to github.");
                     Logger.LogGenericMessage(ex.Message + "\n" + ex.StackTrace);
                 }
             }
