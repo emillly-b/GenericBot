@@ -277,9 +277,11 @@ namespace GenericBot.Database
             var _collection = _db.GetCollection<ExceptionReport>("exceptionReports");
             ExceptionReport foundReport;
             if (_collection.Find(new BsonDocument()).ToList()
-                .HasElement(r => r.Message.Equals(report.Message) && r.StackTrace.Equals(report.StackTrace), out foundReport))
+                .HasElement(r => r.Equals(report), out foundReport))
             {
                 foundReport.Count++;
+                if (report.Reported)
+                    foundReport.Reported = true;
                 _collection.FindOneAndReplace(r => r.Message.Equals(foundReport.Message) && r.StackTrace.Equals(foundReport.StackTrace), foundReport);
             }
             else

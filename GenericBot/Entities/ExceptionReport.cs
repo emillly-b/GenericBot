@@ -34,5 +34,19 @@ namespace GenericBot.Entities
             this.Count = 1;
             this.Reported = false;
         }
+
+        public bool Equals(ExceptionReport obj)
+        {
+            int _confidence = 0;
+            for(int _cursor = 0; _cursor < obj.StackTrace.Length; _cursor++)
+            {
+                if (StackTrace[_cursor].Equals(obj.StackTrace[_cursor]))
+                    _confidence++;
+            }
+            // 97% of report matches, should account for line variations during active development.
+            if (_confidence / StackTrace.Length < .97)
+                return false;
+            return true;
+        }
     }
 }

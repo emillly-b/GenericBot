@@ -76,7 +76,7 @@ namespace GenericBot.Entities
             }
             catch (Exception ex)
             {
-                if (command.Message.Author.Id == Core.GetOwnerId())
+                if (command.Message.Author.Id == Core.GetOwnerId() && Core.GlobalConfig.PrintStackTrace)
                 {
                     await (command.Message as SocketMessage).ReplyAsync("```\n" + $"{ex.Message}\n{ex.StackTrace}".SafeSubstring(1600) +
                                                       "\n```");

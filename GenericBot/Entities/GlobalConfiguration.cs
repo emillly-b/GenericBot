@@ -63,6 +63,9 @@ namespace GenericBot.Entities
         //Toggle to ensure commands are only processed by the owner
         public bool OwnerOnly {get; set; }
 
+        //Toggle for Bot Owner stack trace responses in channel.
+        public bool PrintStackTrace { get; set; }
+
         //Will remove the list from any stack traces etc.
         //full names, full file paths etc.
         public List<string> GitHubFilteredWords { get; set; }
