@@ -18,7 +18,7 @@ namespace GenericBot.CommandModules
             List<Command> commands = new List<Command>();
 
             Command MirrorChannel = new Command("mirrorchannel");
-            MirrorChannel.Delete = true;
+            MirrorChannel.Delete = false;
             MirrorChannel.Description = "Mirror all posts in a channel to another.";
             MirrorChannel.RequiredPermission = Command.PermissionLevels.Admin;
             MirrorChannel.Usage = "mirrorchannel channel\nmirrorchannel";
@@ -44,7 +44,33 @@ namespace GenericBot.CommandModules
                 }                
             };
             commands.Add(MirrorChannel);
+            Command Airlock = new Command("airlock");
+            Airlock.Description = "Airlock System";
+            Airlock.Usage = "TODO";
+            Airlock.RequiredPermission = Command.PermissionLevels.Admin;
+            Airlock.ToExecute+= async (context) =>
+            {
+                switch(context.Parameters[0]) {
+                    case "enable":
+                        context.Message.ReplyAsync("Airlock Enabled");
+                        Enabled = true;
+                        break;
+                    case "disable":
+                        context.Message.ReplyAsync("Airlock Disabled");
+                        Enabled = false;
+                        break;
+                    default:
+                        context.Message.ReplyAsync("Unknown option");
+                        break;
+                }        
+            };
+            commands.Add(Airlock);
+
             return commands;
+        }
+        public async Task PrintAirlockConfiguration(ParsedCommand context)
+        {
+            EmbedBuilder ConfigEmbed = new EmbedBuilder();
         }
         public async Task ChannelMirroringMessageRecieved()
         {
