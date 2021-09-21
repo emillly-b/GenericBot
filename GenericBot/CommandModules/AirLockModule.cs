@@ -50,7 +50,35 @@ namespace GenericBot.CommandModules
             Airlock.RequiredPermission = Command.PermissionLevels.Admin;
             Airlock.ToExecute+= async (context) =>
             {
+                if(context.Parameters.Count == 0) {
+                    await context.Message.ReplyAsync("Unknown option");
+                    return;
+                }
                 switch(context.Parameters[0]) {
+                    
+                    case "config":
+                        await ConfigurationHandler(context);
+                        break;
+                    case "help":
+                        await HelpHandler(context);
+                        break;                    
+                    default:
+                        await context.Message.ReplyAsync("Unknown option");
+                        break;
+                }        
+            };
+            commands.Add(Airlock);
+
+            return commands;
+        }
+        public async Task HelpHandler(ParsedCommand context)
+        {
+            //
+        }
+        public async Task ConfigurationHandler(ParsedCommand context)
+        {
+            switch(context.Parameters[1])
+            {
                     case "enable":
                         context.Message.ReplyAsync("Airlock Enabled");
                         Enabled = true;
@@ -59,18 +87,25 @@ namespace GenericBot.CommandModules
                         context.Message.ReplyAsync("Airlock Disabled");
                         Enabled = false;
                         break;
-                    default:
-                        context.Message.ReplyAsync("Unknown option");
+                    case "show":
+                        PrintAirlockConfiguration(context);
                         break;
-                }        
-            };
-            commands.Add(Airlock);
-
-            return commands;
+                    case "":
+                        context.Message.ReplyAsync("Printing help...");
+                        break;
+            }
         }
         public async Task PrintAirlockConfiguration(ParsedCommand context)
         {
-            EmbedBuilder ConfigEmbed = new EmbedBuilder();
+            var builder = new EmbedBuilder()
+                    .WithTitle("Saturn Bot: Airlock Configuration Information")
+                    .WithUrl("https://github.com/emillly-b/Saturn-Bot")
+                    .WithColor(new Color(0xEF4347))
+                    .WithFooter(new EmbedFooterBuilder().WithText($"If you have questions or notice any errors, please contact {Core.DiscordClient.GetUser(Core.GetOwnerId()).ToString()}"))
+                    .AddField("Airlock Enabled?:", Enabled);
+                var embed = builder.Build();
+
+                await context.Channel.SendMessageAsync("", embed: embed);
         }
         public async Task ChannelMirroringMessageRecieved()
         {
