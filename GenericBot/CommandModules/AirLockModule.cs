@@ -73,7 +73,15 @@ namespace GenericBot.CommandModules
         }
         public async Task HelpHandler(ParsedCommand context)
         {
-            //
+            var builder = new EmbedBuilder()
+                    .WithTitle("Saturn Bot: Airlock Help Information")
+                    .WithUrl("https://github.com/emillly-b/Saturn-Bot")
+                    .WithColor(new Color(0xEF4347))
+                    .WithFooter(new EmbedFooterBuilder().WithText($"If you have questions or notice any errors, please contact {Core.DiscordClient.GetUser(Core.GetOwnerId()).ToString()}"))
+                    .AddField("Airlock Enabled?:", Enabled);
+                var embed = builder.Build();
+
+                await context.Channel.SendMessageAsync("", embed: embed);
         }
         public async Task ConfigurationHandler(ParsedCommand context)
         {

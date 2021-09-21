@@ -310,7 +310,7 @@ namespace GenericBot
                         $"{report.StackTrace}\n" +
                         $"\n" +
                         $"Reporting Build (if available): {Program.BuildId}\n";
-
+                    issueToCreate.Labels.Add("bug");
                     var issue = client.Issue.Create(client.User.Current().Result.Login, "Saturn-Bot", issueToCreate).Result;
                     report.Reported = true;
                     report = DatabaseEngine.AddOrUpdateExceptionReport(report);
