@@ -23,10 +23,6 @@ namespace GenericBot.Entities
         /// </summary>
         public string DefaultPrefix { get; set; }
         /// <summary>
-        /// Whether or not to execute commands if not set for the server
-        /// </summary>
-        public bool DefaultExecuteEdits { get; set; }
-        /// <summary>
         /// List of UserIds who have global admin permissions
         /// </summary>
         public List<ulong> GlobalAdminIds { get; set; }
@@ -81,7 +77,14 @@ namespace GenericBot.Entities
         {
             if (!File.Exists(filePath))
             {
+                //Populate lists so data structure is deserialized appropriately. 
                 var config = new GlobalConfiguration();
+                config.BlacklistedIds = new List<ulong>();
+                config.BlacklistedIds.Add(0);
+                config.GlobalAdminIds = new List<ulong>();
+                config.GlobalAdminIds.Add(0);
+                config.GitHubFilteredWords = new List<string>();
+                config.GitHubFilteredWords.Add("");
                 Directory.CreateDirectory(filePath.Substring(0, filePath.LastIndexOf('/')));
                 File.WriteAllText(filePath, JsonConvert.SerializeObject(config, Formatting.Indented));
                 throw new FileNotFoundException($"Could not find a config file at {filePath}, so one has been created. Please edit it and rerun the bot");
