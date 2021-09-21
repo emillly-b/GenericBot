@@ -302,14 +302,22 @@ namespace GenericBot
             {
                 try
                 {
+                    string trace = report.StackTrace;
+                    string message = report.Message;
+                    if (Core.GlobalConfig.GitHubFilteredWords.Count > 0)
+                    {
+                        foreach(string BannedWord in Core.GlobalConfig.GitHubFilteredWords)
+                        {
+                            trace = trace.Replace(BannedWord, "*removed*");
+                            message = message.Replace(BannedWord, "*removed*");
+                        }
+                    }
                     var githubTokenAuth = new Credentials(GlobalConfig.GithubToken);
                     var client = new GitHubClient(new ProductHeaderValue("Saturn-Bot"));
                     client.Credentials = githubTokenAuth;
-                    var issueToCreate = new NewIssue($"AUTOMATED: {report.Message}");
+                    var issueToCreate = new NewIssue($"AUTOMATED: {message}");
                     issueToCreate.Body = $"Stacktrace:\n" +
-                        $"{report.StackTrace}\n" +
-                        $"\n" +
-                        $"Reporting Build (if available): {Program.BuildId}\n";
+                        $"{trace}\n";
                     issueToCreate.Labels.Add("bug");
                     var issue = client.Issue.Create(client.User.Current().Result.Login, "Saturn-Bot", issueToCreate).Result;
                     report.Reported = true;
