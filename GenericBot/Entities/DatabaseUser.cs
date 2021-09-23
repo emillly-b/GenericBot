@@ -14,8 +14,6 @@ namespace GenericBot.Database
         public List<string> Nicknames { get; set; }
         public List<string> Warnings { get; set; }
         public List<ulong> RoleStore { get; set; }
-        public ulong Points { get; set; }
-        public DateTimeOffset LastPointsAdded { get; set; }
         public ulong Messages { get; set; }
         public bool IsPresent { get; set; }
 

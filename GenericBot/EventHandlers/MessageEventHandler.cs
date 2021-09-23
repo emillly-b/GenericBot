@@ -39,33 +39,7 @@ namespace GenericBot
                 }
             }   catch { }
             #endregion
-            #region Points
-            try
-            {
-                var dbUser = Core.GetUserFromGuild(parameterMessage.Author.Id, parameterMessage.GetGuild().Id);
 
-                //Increment user points
-                dbUser.IncrementPointsAndMessages();
-
-                //Not a fucking clue
-                var dbGuild = Core.GetGuildConfig(parameterMessage.GetGuild().Id);
-                if (dbGuild.TrustedRoleId != 0 && dbUser.Points > dbGuild.TrustedRolePointThreshold)
-                {
-                    var guild = Core.DiscordClient.GetGuild(dbGuild.Id);
-                    var guildUser = guild.GetUser(dbUser.Id);
-                    if (!guildUser.Roles.Any(sr => sr.Id == dbGuild.TrustedRoleId))
-                    {
-                        guildUser.AddRoleAsync(guild.GetRole(dbGuild.TrustedRoleId));
-                    }
-                }
-                Core.SaveUserToGuild(dbUser, parameterMessage.GetGuild().Id);
-            }
-            catch (Exception e)
-            {
-                await Core.Logger.LogErrorMessage(e, null);
-            }
-            #endregion
-            
             try
             {
                 ParsedCommand command;

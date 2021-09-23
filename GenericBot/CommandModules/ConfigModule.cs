@@ -49,10 +49,8 @@ namespace GenericBot.CommandModules
                     $"Verification:\n" +
                     $"    Role Id: `{_guildConfig.VerifiedRole}`\n" +
                     $"    Message: Do `{Core.GetPrefix(context)}config verification message` to see the message\n" +
-                    $"Points: {_guildConfig.PointsEnabled}\n" +
                     $"Auto Roles: `{JsonConvert.SerializeObject(_guildConfig.AutoRoleIds)}`" +
-                    $"Trusted Role Id: `{_guildConfig.TrustedRoleId}`" +
-                    $"Trusted Role Point Threshold: `{_guildConfig.TrustedRolePointThreshold}`";
+                    $"Trusted Role Id: `{_guildConfig.TrustedRoleId}`";
 
                     await context.Message.ReplyAsync(currentConfig);
                 }
@@ -638,61 +636,6 @@ namespace GenericBot.CommandModules
                 }
 
                 #endregion Antispam
-
-                #region Points
-
-                else if (context.Parameters[0].ToLower().Equals("points"))
-                {
-                    if (context.Parameters[1].ToLower().Equals("true") || context.Parameters[1].ToLower().Contains("enable"))
-                    {
-                        _guildConfig.PointsEnabled = true;
-                    }
-                    else if (context.Parameters[1].ToLower().Equals("false") || context.Parameters[1].ToLower().Contains("disable"))
-                    {
-                        _guildConfig.PointsEnabled = false;
-                    }
-                    else
-                    {
-                         await context.Message.ReplyAsync($"Unknown property `{context.Parameters[1]}`.");
-                    }
-                    await context.Message.ReplyAsync($"Points Enabled: {_guildConfig.PointsEnabled}");
-                }
-
-                #endregion Points
-
-                #region Trusted Role
-
-                else if (context.Parameters.FirstOrDefault().Equals("trustedrole"))
-                {
-                    context.Parameters.RemoveAt(0);
-                    if (context.Parameters.Count() < 2)
-                    {
-                        await context.Message.ReplyAsync("Please provide an action and a numeric value.");
-                    }
-
-                    var command = context.Parameters[0];
-                    var argument = context.Parameters[1];
-                    if (ulong.TryParse(argument, out ulong argumentAsLong))
-                    {
-                        switch (command)
-                        {
-                            case "setrole":
-                                _guildConfig.TrustedRoleId = argumentAsLong;
-                                break;
-                            case "threshold":
-                                _guildConfig.TrustedRolePointThreshold = argumentAsLong;
-                                break;
-                            default:
-                                await context.Message.ReplyAsync($"Unknown property `{command}`.");
-                                break;
-                        }
-                    }
-                    else
-                    {
-                        context.Message.ReplyAsync($"Invalid argument `{argument}`.");
-                    }
-                }
-                #endregion
 
                 else await context.Message.ReplyAsync($"Unknown property `{context.Parameters[0]}`.");
 
