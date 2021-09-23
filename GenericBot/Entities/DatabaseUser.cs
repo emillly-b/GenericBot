@@ -26,8 +26,6 @@ namespace GenericBot.Database
             this.Nicknames = new List<string>();
             this.Warnings = new List<string>();
             this.RoleStore = new List<ulong>();
-            this.Points = 0;
-            this.LastPointsAdded = new DateTimeOffset();
             this.Messages = 0;
             this.IsPresent = true;
         }
@@ -102,17 +100,6 @@ namespace GenericBot.Database
         {
             if (this.RoleStore != null && this.RoleStore.Contains(roleId))
                 this.RoleStore.Remove(roleId);
-        }
-
-        public void IncrementPointsAndMessages()
-        {
-            this.IsPresent = true;
-            this.Messages += 1;
-            if (this.LastPointsAdded == null || DateTimeOffset.UtcNow - this.LastPointsAdded > TimeSpan.FromMinutes(1))
-            {
-                this.LastPointsAdded = DateTimeOffset.UtcNow;
-                this.Points += 1;
-            }
         }
     }
 }
