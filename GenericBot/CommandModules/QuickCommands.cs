@@ -21,13 +21,12 @@ namespace GenericBot.CommandModules
             {
                 Command cmd = new Command(_name);
                 cmd.SendTyping = false;
-                cmd.WorksInDms = true;
+                cmd.WorksInDms = false;
                 cmd.Description = _description;
                 cmd.ToExecute += async (context) =>
                 {
                     await context.Message.ReplyAsync(_returnValue);
                 };
-
                 return cmd;
             }
         }
@@ -36,7 +35,7 @@ namespace GenericBot.CommandModules
             List<Command> quickCommands = new List<Command>();
 
             //quickCommands.Add(new QuickCommand("justask", " If you have a question, don't ask if you can ask it. Just ask it, and someone will be along to help you as soon as they can!", "Just ask copypaste").GetCommand());
-            //quickCommands.Add(new QuickCommand("github", "https://github.com/galenguyer/GenericBot", "Link the bot's github repo").GetCommand());
+            quickCommands.Add(new QuickCommand("github", "https://github.com/emillly-b/Saturn-bot", "Link the bot's github repo").GetCommand());
 
             return quickCommands;
         }
