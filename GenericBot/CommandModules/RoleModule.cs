@@ -427,7 +427,7 @@ namespace GenericBot.CommandModules
 
                     try
                     {
-                        await user.GetOrCreateDMChannelAsync().Result.SendMessageAsync(verificationMessage);
+                        await user.CreateDMChannelAsync().Result.SendMessageAsync(verificationMessage);
                         success.Add(user);
                     }
                     catch (Exception ex)
@@ -483,7 +483,7 @@ namespace GenericBot.CommandModules
 
                     try
                     {
-                        await user.GetOrCreateDMChannelAsync().Result.SendMessageAsync(verificationMessage);
+                        await user.CreateDMChannelAsync().Result.SendMessageAsync(verificationMessage);
                         success.Add(user);
                     }
                     catch (Exception ex)

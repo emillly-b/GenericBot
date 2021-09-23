@@ -59,7 +59,7 @@ namespace GenericBot
             DiscordClient.Log += Logger.LogClientMessage;
             DiscordClient.MessageReceived += MessageEventHandler.MessageRecieved;
             DiscordClient.MessageUpdated += MessageEventHandler.HandleEditedCommand;
-            DiscordClient.MessageDeleted += MessageEventHandler.MessageDeleted;
+            //DiscordClient.MessageDeleted += MessageEventHandler.MessageDeleted;
             DiscordClient.UserJoined += UserEventHandler.UserJoined;
             DiscordClient.UserLeft += UserEventHandler.UserLeft;
             DiscordClient.UserUpdated += UserEventHandler.UserUpdated;

@@ -51,7 +51,7 @@ namespace GenericBot.CommandModules
             dmuser.WorksInDms = true;
             dmuser.ToExecute += async (context) =>
             {
-                var channel = Core.DiscordClient.GetUser(ulong.Parse(context.Parameters[0])).GetOrCreateDMChannelAsync().Result;
+                var channel = Core.DiscordClient.GetUser(ulong.Parse(context.Parameters[0])).CreateDMChannelAsync().Result;
                 if(context.Parameters.Count == 1)
                 {
                     var messages = channel.GetMessagesAsync().Flatten().ToListAsync().Result;
