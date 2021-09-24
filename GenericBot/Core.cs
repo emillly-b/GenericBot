@@ -96,7 +96,6 @@ namespace GenericBot
             Commands.AddRange(new InfoModule().Load());
             Commands.AddRange(new LookupModule().Load());
             Commands.AddRange(new QuickCommands().GetQuickCommands());
-            Commands.AddRange(new RoleModule().Load());
             Commands.AddRange(new SocialModule().Load());
             Commands.AddRange(new TestModule().Load());
             Commands.AddRange(new AirLockmodule().Load());

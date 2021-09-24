@@ -13,7 +13,6 @@ namespace GenericBot.Database
         public List<string> Usernames { get; set; }
         public List<string> Nicknames { get; set; }
         public List<string> Warnings { get; set; }
-        public List<ulong> RoleStore { get; set; }
         public ulong Messages { get; set; }
         public bool IsPresent { get; set; }
 
@@ -23,7 +22,6 @@ namespace GenericBot.Database
             this.Usernames = new List<string>();
             this.Nicknames = new List<string>();
             this.Warnings = new List<string>();
-            this.RoleStore = new List<ulong>();
             this.Messages = 0;
             this.IsPresent = true;
         }
@@ -79,25 +77,6 @@ namespace GenericBot.Database
                 Warnings.RemoveRange(0, Warnings.Count);
             }
             return this;
-        }
-
-        public List<ulong> GetStoredRoles()
-        {
-            if (this.RoleStore == null)
-                return new List<ulong>();
-            else return this.RoleStore;
-        }
-        public void AddStoredRole(ulong roleId)
-        {
-            if (this.RoleStore == null)
-                this.RoleStore = new List<ulong>();
-            if (!this.RoleStore.Contains(roleId))
-                this.RoleStore.Add(roleId);
-        }
-        public void RemoveStoredRole(ulong roleId)
-        {
-            if (this.RoleStore != null && this.RoleStore.Contains(roleId))
-                this.RoleStore.Remove(roleId);
         }
     }
 }

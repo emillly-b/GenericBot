@@ -4,6 +4,10 @@
     <TargetFramework>netcoreapp5.0</TargetFramework>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <NoWarn>1701;1702;CS4014;CS1998</NoWarn>
+  </PropertyGroup>
+
   <ItemGroup>
     <PackageReference Include="Discord.Net.Labs" Version="3.1.1" />
     <PackageReference Include="LiteDB" Version="5.0.9" />
