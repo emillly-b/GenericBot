@@ -63,9 +63,6 @@ namespace GenericBot
 
         private static void ExecuteCycle(object sender, ElapsedEventArgs e)
         {
-            //var status = new Status();
-            //Core.AddStatus(status);
-
             // Check for unbans
             foreach (var gid in Core.DiscordClient.Guilds.Select(g => g.Id))
             {
