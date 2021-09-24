@@ -127,20 +127,6 @@ namespace GenericBot.CommandModules
                 }
             };
             commands.Add(find);
-
-            Command lookup = new Command("lookup");
-            lookup.RequiredPermission = Command.PermissionLevels.GlobalAdmin;
-            lookup.Description = "Look up a user's stats across all the bot's guilds";
-            lookup.ToExecute += async (context) =>
-            {
-                var user = Core.DiscordClient.GetUser(ulong.Parse(context.Parameters[0]));
-                var mutualServers = Core.DiscordClient.Guilds.Where(g => g.Users.Any(u => u.Id == user.Id));
-                string data = $"User info for `{user.ToString()}`:\n" +
-                $"Mutual Servers ({mutualServers.Count()}): {mutualServers.Select(s => $"{s.Name} (`{s.Id}`)").ToList().SumAnd()}\n";
-
-                await context.Message.ReplyAsync(data);
-            };
-            commands.Add(lookup);
             
             Command repairDb = new Command("repairdb");
             repairDb.RequiredPermission = Command.PermissionLevels.GlobalAdmin;
