@@ -13,7 +13,7 @@ namespace GenericBot.Database
     /// </summary>
     public class MongoEngine : IDatabaseEngine
     {
-        private MongoClient mongoClient;
+        private readonly MongoClient mongoClient;
 
         public MongoEngine()
         {
