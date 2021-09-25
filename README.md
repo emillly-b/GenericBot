@@ -1,5 +1,5 @@
 # Saturn bot
-[![.NET Core](https://github.com/emillly-b/SaturnBot/actions/workflows/dotnet-core.yml/badge.svg)](https://github.com/emillly-b/SaturnBot/actions/workflows/dotnet-core.yml)
+[![.NET](https://github.com/emillly-b/SaturnBot/actions/workflows/dotnet.yml/badge.svg)](https://github.com/emillly-b/SaturnBot/actions/workflows/dotnet.yml)
 
 ## Current State:
 Bot is functional but a lot needs to be done.
