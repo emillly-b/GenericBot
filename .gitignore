@@ -310,3 +310,4 @@ files/realconfig.json
 files/version.txt
 GenericBot/files/realconfig.json
 GenericBot/files/backup.json
+*.json
