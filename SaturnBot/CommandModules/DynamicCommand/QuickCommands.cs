@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using SaturnBot.Entities;
 
-namespace SaturnBot.CommandModules
+namespace SaturnBot.CommandModules.DynamicCommand
 {
     public class QuickCommands
     {

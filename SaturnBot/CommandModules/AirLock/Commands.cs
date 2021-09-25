@@ -96,6 +96,44 @@ namespace SaturnBot.CommandModules.AirLock
                         context.Message.ReplyAsync("Airlock Disabled");
                         Enabled = false;
                         break;
+                    case "role":
+                    {
+                        switch (context.Parameters[2])
+                        {
+                            case "safe":
+                                {
+                                    Core.Airlock.Configuration.UpdateSafeChannel(ulong.Parse(context.Parameters[3]));
+                                    context.Message.ReplyAsync("Safe Role ID updated too " + context.Parameters[3]);
+                                    break;
+                                }
+                            case "unsafe":
+                                {
+                                    Core.Airlock.Configuration.UpdateUnsafeChannel(ulong.Parse(context.Parameters[3]));
+                                    context.Message.ReplyAsync("Unsafe Role ID updated too " + context.Parameters[3]);
+                                    break;
+                                }
+                        }
+                        break;
+                    }
+                    case "zone":
+                    {
+                        switch (context.Parameters[2])
+                        {
+                            case "safe":
+                            {
+                                Core.Airlock.Configuration.UpdateSafeChannel(ulong.Parse(context.Parameters[3]));
+                                context.Message.ReplyAsync("Safe channel ID updated too " + context.Parameters[3]);
+                                break;
+                            }
+                            case "unsafe":
+                            {
+                                Core.Airlock.Configuration.UpdateUnsafeChannel(ulong.Parse(context.Parameters[3]));
+                                context.Message.ReplyAsync("Unsafe channel ID updated too " + context.Parameters[3]);
+                                break;
+                            }                                
+                        }
+                        break;
+                    }
                     case "show":
                         PrintAirlockConfiguration(context);
                         break;
