@@ -1,0 +1,25 @@
+{
+  "DiscordToken": null,
+  "DbConnectionString": null,
+  "DefaultPrefix": null,
+  "GlobalAdminIds": [
+    0
+  ],
+  "PlayingStatus": null,
+  "BlacklistedIds": [
+    0
+  ],
+  "CommandsToExclude": null,
+  "CriticalLoggingWebhookUrl": null,
+  "CriticalLoggingChannel": 0,
+  "GithubToken": null,
+  "OAuthClientId": null,
+  "OAuthClientSecret": null,
+  "CallbackUri": null,
+  "GitHubIssueCount": 0,
+  "OwnerOnly": false,
+  "PrintStackTrace": false,
+  "GitHubFilteredWords": [
+    ""
+  ]
+}

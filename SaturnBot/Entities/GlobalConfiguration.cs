@@ -76,7 +76,7 @@ namespace SaturnBot.Entities
         /// </summary>
         /// <param name="filePath">Optionally set a location for the config</param>
         /// <returns></returns>
-        public GlobalConfiguration Load(string filePath = "./files/realconfig.json")
+        public GlobalConfiguration Load(string filePath = "./Files/config.json")
         {
             if (!File.Exists(filePath))
             {
@@ -108,7 +108,7 @@ namespace SaturnBot.Entities
             }
         }
         
-        public GlobalConfiguration Save(string filePath = "./files/realconfig.json")
+        public GlobalConfiguration Save(string filePath = "./Files/config.json")
         {
             File.WriteAllText(filePath, JsonConvert.SerializeObject(this, Formatting.Indented));
             return this;

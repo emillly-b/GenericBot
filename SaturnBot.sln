@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30002.166
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SaturnBot", "GenericBot\SaturnBot.csproj", "{11C1304B-D47F-4D5E-9878-5FD95F131303}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SaturnBot", "SaturnBot\SaturnBot.csproj", "{11C1304B-D47F-4D5E-9878-5FD95F131303}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
