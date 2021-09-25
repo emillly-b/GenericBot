@@ -1,5 +1,5 @@
 # Saturn bot
-[![.NET](https://github.com/emillly-b/SaturnBot/actions/workflows/dotnet.yml/badge.svg)](https://github.com/emillly-b/SaturnBot/actions/workflows/dotnet.yml)
+[![.NET](https://github.com/emillly-b/SaturnBot/actions/workflows/dotnet.yml/badge.svg)](https://github.com/emillly-b/SaturnBot/actions/workflows/dotnet.yml) [![CodeQL](https://github.com/emillly-b/SaturnBot/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/emillly-b/SaturnBot/actions/workflows/codeql-analysis.yml)
 
 ## Current State:
 Bot is functional but a lot needs to be done.
