@@ -15,15 +15,17 @@ namespace SaturnBot.CommandModules.AirLock
         public bool Authorized { get; set; }
         [JsonPropertyName("intro-url")]
         public string IntroURL { get; set; }
-        [JsonPropertyName("guild-id")]
-        public ulong GuildID { get; set; }
         
-        public User(ulong id, ulong guildId)
+        public User(ulong id)
         {
             UserID = id;
             Authorized = false;
             IntroURL = string.Empty;
-            GuildID = guildId;
+        }
+
+        public User ()
+        {
+            //
         }
     }
 }

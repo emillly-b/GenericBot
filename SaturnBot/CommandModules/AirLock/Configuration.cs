@@ -22,5 +22,13 @@ namespace SaturnBot.CommandModules.AirLock
         [JsonPropertyName("intro-channel-id")]
         public ulong IntroChannelID { get; set; }
 
+        public Configuration()
+        {
+            Enabled = false;
+            DeleteIntros = false;
+            ApplicationChannelID = 0;
+            IntroChannelID = 0;
+        }
+
     }
 }

@@ -309,3 +309,4 @@ $RECYCLE.BIN/
 SaturnBot/Files/config.backup.json
 SaturnBot/Files/config.json
 SaturnBot/Files/realconfig.json
+SaturnBot/Data/*

@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using SaturnBot.CommandModules.AirLock;
 
 namespace SaturnBot
 {
@@ -29,6 +30,8 @@ namespace SaturnBot
         public static Logger Logger { get; private set; }
         public static IDatabaseEngine DatabaseEngine { get; set; }
 
+        public static AirLockCore Airlock { get; set; }
+
         private static List<GuildConfig> LoadedGuildConfigs;
 
         static Core()
@@ -46,7 +49,7 @@ namespace SaturnBot
             // Create the database engine
             DatabaseEngine = new MongoEngine();
             LoadedGuildConfigs = new List<GuildConfig>();
-            Messages = 0;
+            Messages = 0;           
 
             // Configure Client
             DiscordClient = new DiscordShardedClient(new DiscordSocketConfig()
@@ -55,6 +58,10 @@ namespace SaturnBot
                 AlwaysDownloadUsers = true,
                 MessageCacheSize = 100,
             });
+
+            Airlock = new AirLockCore();
+            Airlock.Load(DiscordClient);
+
             // Set up event handlers
             DiscordClient.Log += Logger.LogClientMessage;
             DiscordClient.MessageReceived += MessageEventHandler.MessageRecieved;

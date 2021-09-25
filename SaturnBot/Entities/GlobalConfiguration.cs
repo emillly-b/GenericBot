@@ -1,7 +1,8 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Text.Json.Serialization;
+using System.Text.Json;
 using System.IO;
 
 namespace SaturnBot.Entities
@@ -90,12 +91,12 @@ namespace SaturnBot.Entities
                 config.GitHubFilteredWords = new List<string>();
                 config.GitHubFilteredWords.Add("");
                 Directory.CreateDirectory(filePath.Substring(0, filePath.LastIndexOf('/')));
-                File.WriteAllText(filePath, JsonConvert.SerializeObject(config, Formatting.Indented));
+                File.WriteAllText(filePath, JsonSerializer.Serialize(config));
                 throw new FileNotFoundException($"Could not find a config file at {filePath}, so one has been created. Please edit it and rerun the bot");
             }
             else if(IsDebug())
             {
-                var config = JsonConvert.DeserializeObject<GlobalConfiguration>(File.ReadAllText("./Files/realconfig.json"));
+                var config = JsonSerializer.Deserialize<GlobalConfiguration>(File.ReadAllText("./Files/realconfig.json"));
                 if (string.IsNullOrEmpty(config.DiscordToken)
                     || string.IsNullOrEmpty(config.DbConnectionString)
                     || string.IsNullOrEmpty(config.DefaultPrefix))
@@ -109,8 +110,8 @@ namespace SaturnBot.Entities
             }
             else
             {
-                var config = JsonConvert.DeserializeObject<GlobalConfiguration>(File.ReadAllText(filePath));
-                if(string.IsNullOrEmpty(config.DiscordToken) 
+                var config = JsonSerializer.Deserialize<GlobalConfiguration>(File.ReadAllText(filePath));
+                if (string.IsNullOrEmpty(config.DiscordToken) 
                     || string.IsNullOrEmpty(config.DbConnectionString)
                     || string.IsNullOrEmpty(config.DefaultPrefix))
                 {
@@ -125,7 +126,7 @@ namespace SaturnBot.Entities
         
         public GlobalConfiguration Save(string filePath = "./Files/config.json")
         {
-            File.WriteAllText(filePath, JsonConvert.SerializeObject(this, Formatting.Indented));
+            File.WriteAllText(filePath, JsonSerializer.Serialize(this));
             return this;
         }
         [Conditional("DEBUG")]

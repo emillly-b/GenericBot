@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 
 
-namespace SaturnBot.CommandModules
+namespace SaturnBot.CommandModules.AirLock
 {
     class Commands : Module
     {
@@ -15,6 +15,7 @@ namespace SaturnBot.CommandModules
         public List<ulong> MirroredChannels { get; set;}
         public List<Command> Load()
         {
+            
             List<Command> commands = new List<Command>();
 
             Command MirrorChannel = new Command("mirrorchannel");
