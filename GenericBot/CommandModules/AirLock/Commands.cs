@@ -1,14 +1,14 @@
 using Discord;
 using Discord.API;
-using GenericBot.Entities;
+using SaturnBot.Entities;
 
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
 
-namespace GenericBot.CommandModules
+namespace SaturnBot.CommandModules
 {
-    class AirLockmodule : Module
+    class Commands : Module
     {
 
         public bool Enabled { get; set;}
@@ -75,7 +75,7 @@ namespace GenericBot.CommandModules
         {
             var builder = new EmbedBuilder()
                     .WithTitle("Saturn Bot: Airlock Help Information")
-                    .WithUrl("https://github.com/emillly-b/Saturn-Bot")
+                    .WithUrl("https://github.com/emillly-b/SaturnBot")
                     .WithColor(new Color(0xEF4347))
                     .WithFooter(new EmbedFooterBuilder().WithText($"If you have questions or notice any errors, please contact {Core.DiscordClient.GetUser(Core.GetOwnerId()).ToString()}"))
                     .AddField("Airlock Enabled?:", Enabled);
@@ -107,7 +107,7 @@ namespace GenericBot.CommandModules
         {
             var builder = new EmbedBuilder()
                     .WithTitle("Saturn Bot: Airlock Configuration Information")
-                    .WithUrl("https://github.com/emillly-b/Saturn-Bot")
+                    .WithUrl("https://github.com/emillly-b/SaturnBot")
                     .WithColor(new Color(0xEF4347))
                     .WithFooter(new EmbedFooterBuilder().WithText($"If you have questions or notice any errors, please contact {Core.DiscordClient.GetUser(Core.GetOwnerId()).ToString()}"))
                     .AddField("Airlock Enabled?:", Enabled);
