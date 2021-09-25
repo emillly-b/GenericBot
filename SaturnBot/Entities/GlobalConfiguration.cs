@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 
 namespace SaturnBot.Entities
@@ -92,6 +93,20 @@ namespace SaturnBot.Entities
                 File.WriteAllText(filePath, JsonConvert.SerializeObject(config, Formatting.Indented));
                 throw new FileNotFoundException($"Could not find a config file at {filePath}, so one has been created. Please edit it and rerun the bot");
             }
+            else if(IsDebug())
+            {
+                var config = JsonConvert.DeserializeObject<GlobalConfiguration>(File.ReadAllText("./Files/realconfig.json"));
+                if (string.IsNullOrEmpty(config.DiscordToken)
+                    || string.IsNullOrEmpty(config.DbConnectionString)
+                    || string.IsNullOrEmpty(config.DefaultPrefix))
+                {
+                    throw new Exception($"Config file at {filePath} has required values not set. Please edit them and rerun the bot");
+                }
+                else
+                {
+                    return config;
+                }
+            }
             else
             {
                 var config = JsonConvert.DeserializeObject<GlobalConfiguration>(File.ReadAllText(filePath));
@@ -112,6 +127,18 @@ namespace SaturnBot.Entities
         {
             File.WriteAllText(filePath, JsonConvert.SerializeObject(this, Formatting.Indented));
             return this;
+        }
+        [Conditional("DEBUG")]
+        private void IsDebugCheck(ref bool isDebug)
+        {
+            isDebug = true;
+        }
+
+        private bool IsDebug()
+        {
+            bool isDebug = false;
+            IsDebugCheck(ref isDebug);
+            return isDebug;
         }
     }
 }

@@ -305,9 +305,7 @@ $RECYCLE.BIN/
 # Custom
 *.bat
 
-GenericBot/files/config.json
-files/realconfig.json
-files/version.txt
-GenericBot/files/realconfig.json
-GenericBot/files/backup.json
-*.json
+
+SaturnBot/Files/config.backup.json
+SaturnBot/Files/config.json
+SaturnBot/Files/realconfig.json
