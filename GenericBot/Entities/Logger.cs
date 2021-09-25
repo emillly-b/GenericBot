@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 using Discord;
-using GenericBot.Entities;
+using SaturnBot.Entities;
 
-namespace GenericBot
+namespace SaturnBot
 {
     public class Logger
     {

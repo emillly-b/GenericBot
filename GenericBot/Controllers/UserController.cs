@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace GenericBot.Controllers
+namespace SaturnBot.Controllers
 {
     [Route("api/v1/[controller]")]
     [ApiController]

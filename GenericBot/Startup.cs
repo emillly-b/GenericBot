@@ -19,7 +19,7 @@ using Microsoft.Extensions.Logging;
 using System.Text.Json;
 using Microsoft.AspNetCore.HttpOverrides;
 
-namespace GenericBot
+namespace SaturnBot
 {
     public class Startup
     {

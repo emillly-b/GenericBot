@@ -8,7 +8,7 @@ using MongoDB.Bson.Serialization.Options;
 using MongoDB.Driver;
 using Newtonsoft.Json;
 
-namespace GenericBot.Entities
+namespace SaturnBot.Entities
 {
     public class GuildConfig
     {

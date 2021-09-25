@@ -1,13 +1,13 @@
 ﻿using Discord;
 using Discord.WebSocket;
-using GenericBot.Entities;
+using SaturnBot.Entities;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
 
-namespace GenericBot.CommandModules
+namespace SaturnBot.CommandModules
 {
     public class InfoModule : Module
     {
@@ -66,7 +66,7 @@ namespace GenericBot.CommandModules
                 var builder = new EmbedBuilder()
                     .WithTitle("Saturn: its ringy")
                     .WithDescription("")
-                    .WithUrl("https://github.com/emillly-b/Saturn-Bot")
+                    .WithUrl("https://github.com/emillly-b/SaturnBot")
                     .WithColor(new Color(0xFF))
                     .WithFooter(footer =>
                     {
@@ -75,7 +75,7 @@ namespace GenericBot.CommandModules
                             .WithIconUrl(Core.DiscordClient.GetUser(341275030941859850).GetAvatarUrl());
                     })
                     .WithThumbnailUrl(Core.DiscordClient.CurrentUser.GetAvatarUrl().Replace("size=128", "size=2048"))
-                    .AddField($"Built on", $"Saturn is based on GenericBot, the source code is public on [github](https://github.com/galenguyer/GenericBot)")
+                    .AddField($"Built on", $"Saturn is based on SaturnBot, the source code is public on [github](https://github.com/galenguyer/SaturnBot)")
                     .AddField($"Getting Started", $"See everything you can make me do with `{prefix}help`. {config}");
                 var embed = builder.Build();
 
@@ -92,9 +92,9 @@ namespace GenericBot.CommandModules
                 string prefix = Core.GetPrefix(context);
 
                 var builder = new EmbedBuilder()
-                    .WithTitle("GenericBot: Config Information")
+                    .WithTitle("SaturnBot: Config Information")
                     .WithDescription($"The `{prefix}config` command is huge and confusing. This aims to make it a bit simpler (For more general assistance, try `{prefix}info`)")
-                    .WithUrl("https://github.com/galenguyer/GenericBot")
+                    .WithUrl("https://github.com/galenguyer/SaturnBot")
                     .WithColor(new Color(0xEF4347))
                     .WithFooter(new EmbedFooterBuilder().WithText($"If you have questions or notice any errors, please contact {Core.DiscordClient.GetUser(169918990313848832).ToString()}"))
                     .WithThumbnailUrl("https://upload.wikimedia.org/wikipedia/commons/thumb/1/10/Gear_1.svg/1000px-Gear_1.svg.png")
@@ -235,12 +235,12 @@ namespace GenericBot.CommandModules
             {
                 string stats = $"**Global Stats:** `{DateTime.Now}`\n" +
                                $"SessionID: `{Core.Logger.SessionId}`\n" +
-                               //$"Build Number: `{GenericBot.BuildId}`\n\n" +
+                               //$"Build Number: `{SaturnBot.BuildId}`\n\n" +
                                $"Servers: `{Core.DiscordClient.Guilds.Count}`\n" +
                                $"Users: `{Core.DiscordClient.Guilds.Sum(g => g.MemberCount)}`\n" +
                                $"Messages: `{Core.Messages}` received\n" +
                                $"Shards: `{Core.DiscordClient.Shards.Count}`\n" +
-                               //$"CPU Usage: `{Math.Round(GenericBot.CpuCounter.NextValue())}`% \n" +
+                               //$"CPU Usage: `{Math.Round(SaturnBot.CpuCounter.NextValue())}`% \n" +
                                $"Memory: `{Math.Round(GC.GetTotalMemory(true) / (1024.0 * 1024.0), 2)} MB`\n" +
                                $"Uptime: `{(DateTime.Now - Process.GetCurrentProcess().StartTime).ToString(@"dd\.hh\:mm\:ss")}`\n\n";
 

@@ -3,7 +3,7 @@ using System.Text.RegularExpressions;
 using Discord;
 using Discord.WebSocket;
 
-namespace GenericBot
+namespace SaturnBot
 {
     public static class VerificationEngine
     {

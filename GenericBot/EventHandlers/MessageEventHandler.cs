@@ -3,10 +3,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using Discord;
 using Discord.WebSocket;
-using GenericBot.Entities;
+using SaturnBot.Entities;
 using Newtonsoft.Json;
 
-namespace GenericBot
+namespace SaturnBot
 {
     public static class MessageEventHandler
     {

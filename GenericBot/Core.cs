@@ -1,8 +1,8 @@
 ﻿using Discord;
 using Discord.WebSocket;
-using GenericBot.CommandModules;
-using GenericBot.Database;
-using GenericBot.Entities;
+using SaturnBot.CommandModules;
+using SaturnBot.Database;
+using SaturnBot.Entities;
 using Octokit;
 using System;
 using System.Collections.Generic;
@@ -10,7 +10,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace GenericBot
+namespace SaturnBot
 {
     /// <summary>
     /// The Core client, responsible for loading everything on startup and wrapping
@@ -96,8 +96,8 @@ namespace GenericBot
             Commands.AddRange(new InfoModule().Load());
             Commands.AddRange(new LookupModule().Load());
             Commands.AddRange(new QuickCommands().GetQuickCommands());
-            Commands.AddRange(new TestModule().Load());
-            Commands.AddRange(new AirLockmodule().Load());
+            //Commands.AddRange(new TestModule().Load());
+            Commands.AddRange(new Commands().Load());
 
             if (CommandsToExclude == null)
                 return;
@@ -310,13 +310,13 @@ namespace GenericBot
                         }
                     }
                     var githubTokenAuth = new Credentials(GlobalConfig.GithubToken);
-                    var client = new GitHubClient(new ProductHeaderValue("Saturn-Bot"));
+                    var client = new GitHubClient(new ProductHeaderValue("SaturnBot"));
                     client.Credentials = githubTokenAuth;
                     var issueToCreate = new NewIssue($"AUTOMATED: {message}");
                     issueToCreate.Body = $"Stacktrace:\n" +
                         $"{trace}\n";
                     issueToCreate.Labels.Add("bug");
-                    var issue = client.Issue.Create(client.User.Current().Result.Login, "Saturn-Bot", issueToCreate).Result;
+                    var issue = client.Issue.Create(client.User.Current().Result.Login, "SaturnBot", issueToCreate).Result;
                     report.Reported = true;
                     report = DatabaseEngine.AddOrUpdateExceptionReport(report);
                 }

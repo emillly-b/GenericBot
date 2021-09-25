@@ -1,13 +1,13 @@
 ﻿using Discord.WebSocket;
-using GenericBot.Database;
-using GenericBot.Entities;
+using SaturnBot.Database;
+using SaturnBot.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Discord;
 
-namespace GenericBot.CommandModules
+namespace SaturnBot.CommandModules
 {
     class LookupModule : Module
     {

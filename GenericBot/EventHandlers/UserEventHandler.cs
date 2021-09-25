@@ -5,10 +5,10 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Discord;
 using Discord.WebSocket;
-using GenericBot.Database;
-using GenericBot.Entities;
+using SaturnBot.Database;
+using SaturnBot.Entities;
 
-namespace GenericBot
+namespace SaturnBot
 {
     public static class UserEventHandler
     {

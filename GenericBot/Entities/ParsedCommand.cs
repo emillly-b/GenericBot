@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using Discord;
 using Discord.WebSocket;
 
-namespace GenericBot.Entities
+namespace SaturnBot.Entities
 {
     public class ParsedCommand
     {

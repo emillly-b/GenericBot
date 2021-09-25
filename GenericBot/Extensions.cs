@@ -8,7 +8,7 @@ using Discord;
 using Discord.Rest;
 using Discord.WebSocket;
 
-namespace GenericBot
+namespace SaturnBot
 {
     public static class Extensions
     {

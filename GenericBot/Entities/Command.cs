@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Discord.WebSocket;
 
-namespace GenericBot.Entities
+namespace SaturnBot.Entities
 {
     /// <summary>
     /// Raw Command object to build

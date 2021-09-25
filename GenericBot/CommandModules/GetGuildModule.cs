@@ -5,9 +5,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using Discord;
 using Discord.WebSocket;
-using GenericBot.Entities;
+using SaturnBot.Entities;
 
-namespace GenericBot.CommandModules
+namespace SaturnBot.CommandModules
 {
     class GetGuildModule : Module
     {

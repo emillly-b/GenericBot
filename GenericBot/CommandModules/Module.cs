@@ -1,9 +1,9 @@
-﻿using GenericBot.Entities;
+﻿using SaturnBot.Entities;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace GenericBot.CommandModules
+namespace SaturnBot.CommandModules
 {
     interface Module
     {

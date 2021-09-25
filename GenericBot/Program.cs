@@ -10,9 +10,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Discord.WebSocket;
-using GenericBot.Entities;
+using SaturnBot.Entities;
 
-namespace GenericBot
+namespace SaturnBot
 {
     public class Program
     {

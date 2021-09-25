@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30002.166
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GenericBot", "GenericBot\GenericBot.csproj", "{11C1304B-D47F-4D5E-9878-5FD95F131303}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SaturnBot", "GenericBot\SaturnBot.csproj", "{11C1304B-D47F-4D5E-9878-5FD95F131303}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,10 +15,6 @@ Global
 		{11C1304B-D47F-4D5E-9878-5FD95F131303}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{11C1304B-D47F-4D5E-9878-5FD95F131303}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{11C1304B-D47F-4D5E-9878-5FD95F131303}.Release|Any CPU.Build.0 = Release|Any CPU
-		{852534B5-BD02-41F7-937D-FFEB97EDBF94}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{852534B5-BD02-41F7-937D-FFEB97EDBF94}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{852534B5-BD02-41F7-937D-FFEB97EDBF94}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{852534B5-BD02-41F7-937D-FFEB97EDBF94}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

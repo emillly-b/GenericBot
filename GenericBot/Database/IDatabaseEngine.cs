@@ -1,10 +1,10 @@
-﻿using GenericBot.Entities;
+﻿using SaturnBot.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace GenericBot.Database
+namespace SaturnBot.Database
 {
     // TODO: Come up with a more consistent naming scheme
     /// <summary>

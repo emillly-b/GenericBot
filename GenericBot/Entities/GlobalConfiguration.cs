@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 
-namespace GenericBot.Entities
+namespace SaturnBot.Entities
 {
     /// <summary>
     /// Configuration settings for the entire bot

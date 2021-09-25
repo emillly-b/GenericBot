@@ -1,6 +1,6 @@
 ﻿using Discord;
-using GenericBot.Database;
-using GenericBot.Entities;
+using SaturnBot.Database;
+using SaturnBot.Entities;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -9,7 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 
-namespace GenericBot.CommandModules
+namespace SaturnBot.CommandModules
 {
     class ConfigModule : Module
     {

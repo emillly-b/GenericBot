@@ -1,4 +1,4 @@
-﻿namespace GenericBot.Entities
+﻿namespace SaturnBot.Entities
 {
     public class CustomAlias
     {

@@ -1,4 +1,4 @@
-﻿using GenericBot.Entities;
+﻿using SaturnBot.Entities;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -6,7 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 
-namespace GenericBot.Web_Api
+namespace SaturnBot.Web_Api
 {
     public static class Authentication
     {

@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace GenericBot.Database
+namespace SaturnBot.Database
 {
     public class DatabaseUser
     {
