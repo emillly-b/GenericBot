@@ -6,16 +6,16 @@ EXPOSE 80
 
 FROM mcr.microsoft.com/dotnet/core/sdk:3.1-buster AS build
 WORKDIR /src
-COPY ["GenericBot/GenericBot.csproj", "GenericBot/"]
-RUN dotnet restore "GenericBot/GenericBot.csproj"
+COPY ["SaturnBot/SaturnBot.csproj", "SaturnBot/"]
+RUN dotnet restore "SaturnBot/SaturnBot.csproj"
 COPY . .
-WORKDIR "/src/GenericBot"
-RUN dotnet build "GenericBot.csproj" -c Release -o /app/build
+WORKDIR "/src/SaturnBot"
+RUN dotnet build "SaturnBot.csproj" -c Release -o /app/build
 
 FROM build AS publish
-RUN dotnet publish "GenericBot.csproj" -c Release -o /app/publish
+RUN dotnet publish "SaturnBot.csproj" -c Release -o /app/publish
 
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "GenericBot.dll"]
+ENTRYPOINT ["dotnet", "SaturnBot.dll"]
