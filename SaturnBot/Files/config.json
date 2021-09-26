@@ -2,13 +2,9 @@
   "DiscordToken": null,
   "DbConnectionString": null,
   "DefaultPrefix": null,
-  "GlobalAdminIds": [
-    0
-  ],
+  "GlobalAdminIds": [],
   "PlayingStatus": null,
-  "BlacklistedIds": [
-    0
-  ],
+  "BlacklistedIds": [],
   "CommandsToExclude": null,
   "CriticalLoggingWebhookUrl": null,
   "CriticalLoggingChannel": 0,
@@ -19,7 +15,5 @@
   "GitHubIssueCount": 0,
   "OwnerOnly": false,
   "PrintStackTrace": false,
-  "GitHubFilteredWords": [
-    ""
-  ]
+  "GitHubFilteredWords": []
 }
