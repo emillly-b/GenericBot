@@ -49,7 +49,7 @@ namespace SaturnBot
             File.AppendAllText($"{BasePath}{SessionId}.log", message + "\n");
             return Task.FromResult(1);
         }
-        public Task LogDebugWarningMessage(string msg)
+        public Task LogDebugMessage(string msg)
         {
             Console.ForegroundColor = ConsoleColor.DarkRed;
             string message = $"[Debug] {DateTime.UtcNow.ToString(@"yyyy-MM-dd_HH-mm")}: {msg}";
