@@ -28,33 +28,18 @@ namespace SaturnBot.CommandModules.AirLock
         [JsonPropertyName("safe-role-id")]
         public ulong SafeRoleId { get; set; }
 
+        [JsonPropertyName("admin-role-id")]
+        public ulong AdminRoleId { get; set; }
+
+        [JsonPropertyName("mod-role-id")]
+        public ulong ModRoleId { get; set; }
+
         public Configuration()
         {
             Enabled = false;
             DeleteIntros = false;
             UnsafeChannelId = 0;
             SafeChannelId = 0;
-        }
-
-        public void UpdateSafeChannel(ulong channelId)
-        {
-            SafeChannelId = channelId;
-            Database.SaveConfiguration(this);
-        }
-        public void UpdateUnsafeChannel(ulong channelId)
-        {
-            UnsafeChannelId = channelId;
-            Database.SaveConfiguration(this);
-        }
-        public void UpdateSafeRole(ulong roleId)
-        {
-            SafeRoleId = roleId;
-            Database.SaveConfiguration(this);
-        }
-        public void UpdateUnsafeRole(ulong roleId)
-        {
-            UnsafeRoleId = roleId;
-            Database.SaveConfiguration(this);
         }
     }
 }
