@@ -10,11 +10,12 @@ namespace SaturnBot
     public class Logger
     {
         public readonly string SessionId;
+        public readonly string BasePath = @"./Data/Logs/";
 
         public Logger()
         {
             SessionId = $"{DateTime.UtcNow.ToString(@"yyyy-MM-dd_HH-mm")}_{new Random().Next(1000, 9999)}";
-            Directory.CreateDirectory("./files/sessions");
+            Directory.CreateDirectory(BasePath);
             LogGenericMessage($"New Logger created with SessionID of {SessionId}");
         }
 
@@ -35,17 +36,25 @@ namespace SaturnBot
                 message += "\n" + msg.Exception.StackTrace;
             }
             Console.WriteLine(message);
-            File.AppendAllText($"files/sessions/{SessionId}.log", message + "\n");
+            File.AppendAllText($"{BasePath}{SessionId}.log", message + "\n");
             if (message.Contains("Server missed last heartbeat"))
                 Environment.Exit(1);
             return Task.FromResult(1);
         }
         public Task LogGenericWarningMessage(string msg)
         {
-            Console.ForegroundColor = ConsoleColor.DarkRed;
+            Console.ForegroundColor = ConsoleColor.Yellow;
             string message = $"[Warning] {DateTime.UtcNow.ToString(@"yyyy-MM-dd_HH-mm")}: {msg}";
             Console.WriteLine(message);
-            File.AppendAllText($"files/sessions/{SessionId}.log", message + "\n");
+            File.AppendAllText($"{BasePath}{SessionId}.log", message + "\n");
+            return Task.FromResult(1);
+        }
+        public Task LogDebugWarningMessage(string msg)
+        {
+            Console.ForegroundColor = ConsoleColor.DarkRed;
+            string message = $"[Debug] {DateTime.UtcNow.ToString(@"yyyy-MM-dd_HH-mm")}: {msg}";
+            Console.WriteLine(message);
+            File.AppendAllText($"{BasePath}{SessionId}.log", message + "\n");
             return Task.FromResult(1);
         }
 
@@ -54,7 +63,7 @@ namespace SaturnBot
             Console.ForegroundColor = ConsoleColor.Blue;
             string message = $"[Generic] {DateTime.UtcNow.ToString(@"yyyy-MM-dd_HH-mm")}: {msg}";
             Console.WriteLine(message);
-            File.AppendAllText($"files/sessions/{SessionId}.log", message + "\n");
+            File.AppendAllText($"{BasePath}{SessionId}.log", message + "\n");
             return Task.FromResult(1);
         }
         public Task LogErrorMessage(Exception exception, ParsedCommand context)
@@ -62,7 +71,7 @@ namespace SaturnBot
             Console.ForegroundColor = ConsoleColor.DarkMagenta;
             string message = $"[Error] {DateTime.UtcNow.ToString(@"yyyy-MM-dd_HH-mm")}: {exception}";
             Console.WriteLine(message);
-            File.AppendAllText($"files/sessions/{SessionId.Substring(0, 8)}.log", message + "\n");
+            File.AppendAllText($"{BasePath}{SessionId.Substring(0, 8)}.log", message + "\n");
             ExceptionReport report = Core.AddOrUpdateExceptionReport(new ExceptionReport(exception));
 
             if (!string.IsNullOrEmpty(Core.GlobalConfig.CriticalLoggingWebhookUrl))
