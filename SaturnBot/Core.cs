@@ -105,7 +105,7 @@ namespace SaturnBot
             Commands.AddRange(new LookupModule().Load());
             Commands.AddRange(new QuickCommands().GetQuickCommands());
             //Commands.AddRange(new TestModule().Load());
-            Commands.AddRange(new Commands().Load());
+            Commands.AddRange(new CommandHandler().Load());
 
             if (CommandsToExclude == null)
                 return;

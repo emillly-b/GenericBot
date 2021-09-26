@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace SaturnBot.CommandModules.AirLock
 {
-    class Commands : Module
+    class CommandHandler : Module
     {
 
         public bool Enabled { get; set;}
@@ -18,33 +18,6 @@ namespace SaturnBot.CommandModules.AirLock
             
             List<Command> commands = new List<Command>();
 
-            Command MirrorChannel = new Command("mirrorchannel");
-            MirrorChannel.Delete = false;
-            MirrorChannel.Description = "Mirror all posts in a channel to another.";
-            MirrorChannel.RequiredPermission = Command.PermissionLevels.Admin;
-            MirrorChannel.Usage = "mirrorchannel channel\nmirrorchannel";
-            MirrorChannel.ToExecute += async (context) =>
-            {
-                if(!Enabled)
-                {
-                    await context.Message.ReplyAsync("Channel Mirroring is been disabled.");
-                    return;
-                }
-                ulong channelid = context.Channel.Id;
-                if(context.Message.MentionedChannels.Count == 0)
-                {
-                    MirroredChannels.Add(channelid);
-                    await context.Message.ReplyAsync("Current channel added to the mirroring list. ID: " + channelid);
-                }
-                if(context.Message.MentionedChannels.Count > 0)
-                {
-                    foreach(IGuildChannel c in context.Message.MentionedChannels)
-                        MirroredChannels.Add(c.Id);
-                    foreach(IGuildChannel c in context.Message.MentionedChannels)
-                        await context.Message.ReplyAsync("Channel added to the mirroring list: " + c.Name + " ID: " + c.Id);
-                }                
-            };
-            commands.Add(MirrorChannel);
             Command Airlock = new Command("airlock");
             Airlock.Description = "Airlock System";
             Airlock.Usage = "TODO";
@@ -102,13 +75,13 @@ namespace SaturnBot.CommandModules.AirLock
                         {
                             case "safe":
                                 {
-                                    Core.Airlock.Configuration.UpdateSafeChannel(ulong.Parse(context.Parameters[3]));
+                                    Core.Airlock.Configuration.SafeChannelId = ulong.Parse(context.Parameters[3]);
                                     context.Message.ReplyAsync("Safe Role ID updated too " + context.Parameters[3]);
                                     break;
                                 }
                             case "unsafe":
                                 {
-                                    Core.Airlock.Configuration.UpdateUnsafeChannel(ulong.Parse(context.Parameters[3]));
+                                    Core.Airlock.Configuration.UnsafeChannelId = ulong.Parse(context.Parameters[3]);
                                     context.Message.ReplyAsync("Unsafe Role ID updated too " + context.Parameters[3]);
                                     break;
                                 }
@@ -121,13 +94,13 @@ namespace SaturnBot.CommandModules.AirLock
                         {
                             case "safe":
                             {
-                                Core.Airlock.Configuration.UpdateSafeChannel(ulong.Parse(context.Parameters[3]));
+                                Core.Airlock.Configuration.SafeChannelId = ulong.Parse(context.Parameters[3]);
                                 context.Message.ReplyAsync("Safe channel ID updated too " + context.Parameters[3]);
                                 break;
                             }
                             case "unsafe":
                             {
-                                Core.Airlock.Configuration.UpdateUnsafeChannel(ulong.Parse(context.Parameters[3]));
+                                Core.Airlock.Configuration.UnsafeChannelId = ulong.Parse(context.Parameters[3]);
                                 context.Message.ReplyAsync("Unsafe channel ID updated too " + context.Parameters[3]);
                                 break;
                             }                                
