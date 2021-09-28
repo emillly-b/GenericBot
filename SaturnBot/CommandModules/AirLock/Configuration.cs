@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using SaturnBot.Entities;
 
 namespace SaturnBot.CommandModules.AirLock
 {
@@ -41,5 +42,6 @@ namespace SaturnBot.CommandModules.AirLock
             UnsafeChannelId = 0;
             SafeChannelId = 0;
         }
+
     }
 }

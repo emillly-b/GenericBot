@@ -19,11 +19,6 @@ namespace SaturnBot.CommandModules.AirLock
             Id = id;
             Members = new List<User>();
         }
-
-        public Guild()
-        {
-            //
-        }
         
         public bool Equals(Guild a, Guild b)
         {

@@ -27,5 +27,12 @@ namespace SaturnBot.CommandModules.AirLock
         {
             //
         }
+
+        public bool Equals(User obj)
+        {
+            if (UserID == obj.UserID)
+                return true;
+            return false;
+        }
     }
 }

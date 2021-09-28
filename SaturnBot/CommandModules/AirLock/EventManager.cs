@@ -38,6 +38,8 @@ namespace SaturnBot.CommandModules.AirLock
             {
                 if (_cursor.Id == _guild.Id)
                 {
+                    if (_cursor.Members.Contains(new User(parameterMessage.Author.Id)))
+                        return;
                     _cursor.Members.Add(new User(parameterMessage.Author.Id));
                     SaturnBot.Core.Logger.LogDebugMessage("Airlock user: " + parameterMessage.Author.Id + " Added to guild: ");
                 }
@@ -47,16 +49,13 @@ namespace SaturnBot.CommandModules.AirLock
 
         public async Task GuildJoinEvent(SocketGuild guild)
         {
+            foreach (Guild g in Core.ActiveGuilds)
+            {
+                if (g.Id == guild.Id)
+                    return;
+            }
+            Core.ActiveGuilds.Add(new Guild(guild.Id));
             SaturnBot.Core.Logger.LogDebugMessage("Airlock Guild Join Event");
-            if (Core.ActiveGuilds.Contains(new Guild(guild.Id)))
-            {
-                return;
-            }
-            else
-            {
-                Core.ActiveGuilds.Add(new Guild(guild.Id));
-                SaturnBot.Core.Logger.LogDebugMessage("Airlock Guild Join Event");
-            }
         }
     }
 }

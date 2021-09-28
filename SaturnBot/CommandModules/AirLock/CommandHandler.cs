@@ -61,15 +61,29 @@ namespace SaturnBot.CommandModules.AirLock
         {
             switch(context.Parameters[1])
             {
-                    case "enable":
-                        context.Message.ReplyAsync("Airlock Enabled");
-                        Enabled = true;
-                        break;
-                    case "disable":
-                        context.Message.ReplyAsync("Airlock Disabled");
-                        Enabled = false;
-                        break;
-                    case "role":
+                case "enable":
+                    context.Message.ReplyAsync("Airlock Enabled");
+                    Enabled = true;
+                    break;
+                case "disable":
+                    context.Message.ReplyAsync("Airlock Disabled");
+                    Enabled = false;
+                    break;
+                case "update":
+                    Core.Airlock.UpdateIntros(context);
+                    break;
+                case "show":
+                    PrintAirlockConfiguration(context);
+                    break;
+                case "save":
+                    Database.SaveConfiguration(Core.Airlock.Configuration);
+                    Database.SaveGuilds(Core.Airlock.ActiveGuilds);
+                    context.Message.ReplyAsync("Config Saved");
+                    break;
+                case "":
+                    context.Message.ReplyAsync("Printing help...");
+                    break;
+                case "role":
                     {
                         switch (context.Parameters[2])
                         {
@@ -88,7 +102,7 @@ namespace SaturnBot.CommandModules.AirLock
                         }
                         break;
                     }
-                    case "zone":
+                case "zone":
                     {
                         switch (context.Parameters[2])
                         {
@@ -107,12 +121,7 @@ namespace SaturnBot.CommandModules.AirLock
                         }
                         break;
                     }
-                    case "show":
-                        PrintAirlockConfiguration(context);
-                        break;
-                    case "":
-                        context.Message.ReplyAsync("Printing help...");
-                        break;
+                    
             }
         }
         public async Task PrintAirlockConfiguration(ParsedCommand context)
@@ -126,10 +135,6 @@ namespace SaturnBot.CommandModules.AirLock
                 var embed = builder.Build();
 
                 await context.Channel.SendMessageAsync("", embed: embed);
-        }
-        public async Task ChannelMirroringMessageRecieved()
-        {
-            //
         }
     }
 }
