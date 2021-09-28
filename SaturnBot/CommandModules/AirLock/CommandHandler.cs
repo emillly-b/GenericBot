@@ -18,10 +18,12 @@ namespace SaturnBot.CommandModules.AirLock
             
             List<Command> commands = new List<Command>();
 
-            Command Airlock = new Command("airlock");
-            Airlock.Description = "Airlock System";
-            Airlock.Usage = "TODO";
-            Airlock.RequiredPermission = Command.PermissionLevels.Admin;
+            Command Airlock = new Command("airlock")
+            {
+                Description = "Airlock System",
+                Usage = "TODO",
+                RequiredPermission = Command.PermissionLevels.Admin
+            };
             Airlock.ToExecute+= async (context) =>
             {
                 if(context.Parameters.Count == 0) {
@@ -43,6 +45,37 @@ namespace SaturnBot.CommandModules.AirLock
             };
             commands.Add(Airlock);
 
+            Command Welcome = new Command("welcome")
+            {
+                Description = "Airlock Welcome Command",
+                Usage = Core.GetGlobalPrefix() + "welcome @user",
+                RequiredPermission = Command.PermissionLevels.Moderator
+            };
+            Welcome.ToExecute += async (context) =>
+            {
+                if (ulong.TryParse(context.Parameters[0], out ulong id))
+                {
+                    var client = Core.Airlock.Client;
+                    var guild = Core.Airlock.GetGuild(context.Guild.Id);
+                    var channel = client.GetChannel(guild.SafeChannelId) as IMessageChannel;
+                    var enumerator = channel.GetMessagesAsync(100).Flatten().GetAsyncEnumerator();
+                    while (await enumerator.MoveNextAsync())
+                    {
+                        if(enumerator.Current.Author.Id == id)
+                        {
+                            var airlockUser = guild.GetUser(id);
+                            airlockUser.Authorized = true;
+                            airlockUser.IntroID = enumerator.Current.Id;
+                            var disGuild = client.GetGuild(context.Guild.Id);
+                            disGuild.GetUser(id).AddRoleAsync(guild.SafeRoleId);
+                            disGuild.GetUser(id).RemoveRoleAsync(guild.UnsafeRoleId);
+                            break;
+                        }
+                    }
+                    context.Message.ReplyAsync("User updated.");
+                }
+            };
+            commands.Add(Welcome);
             return commands;
         }
         public async Task HelpHandler(ParsedCommand context)
@@ -59,7 +92,8 @@ namespace SaturnBot.CommandModules.AirLock
         }
         public async Task ConfigurationHandler(ParsedCommand context)
         {
-            switch(context.Parameters[1])
+            ulong currentGuild = context.Guild.Id;
+            switch (context.Parameters[1])
             {
                 case "enable":
                     context.Message.ReplyAsync("Airlock Enabled");
@@ -89,13 +123,13 @@ namespace SaturnBot.CommandModules.AirLock
                         {
                             case "safe":
                                 {
-                                    Core.Airlock.Configuration.SafeChannelId = ulong.Parse(context.Parameters[3]);
+                                    Core.Airlock.GetGuild(currentGuild).SafeRoleId = ulong.Parse(context.Parameters[3]);
                                     context.Message.ReplyAsync("Safe Role ID updated too " + context.Parameters[3]);
                                     break;
                                 }
                             case "unsafe":
                                 {
-                                    Core.Airlock.Configuration.UnsafeChannelId = ulong.Parse(context.Parameters[3]);
+                                    Core.Airlock.GetGuild(currentGuild).UnsafeRoleId = ulong.Parse(context.Parameters[3]);
                                     context.Message.ReplyAsync("Unsafe Role ID updated too " + context.Parameters[3]);
                                     break;
                                 }
@@ -108,13 +142,13 @@ namespace SaturnBot.CommandModules.AirLock
                         {
                             case "safe":
                             {
-                                Core.Airlock.Configuration.SafeChannelId = ulong.Parse(context.Parameters[3]);
+                                Core.Airlock.GetGuild(currentGuild).SafeChannelId = ulong.Parse(context.Parameters[3]);
                                 context.Message.ReplyAsync("Safe channel ID updated too " + context.Parameters[3]);
                                 break;
                             }
                             case "unsafe":
                             {
-                                Core.Airlock.Configuration.UnsafeChannelId = ulong.Parse(context.Parameters[3]);
+                                Core.Airlock.GetGuild(currentGuild).UnsafeChannelId = ulong.Parse(context.Parameters[3]);
                                 context.Message.ReplyAsync("Unsafe channel ID updated too " + context.Parameters[3]);
                                 break;
                             }                                

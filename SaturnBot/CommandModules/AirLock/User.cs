@@ -13,14 +13,21 @@ namespace SaturnBot.CommandModules.AirLock
         public ulong UserID { get; set; }
         [JsonPropertyName("authorized")]
         public bool Authorized { get; set; }
-        [JsonPropertyName("intro-url")]
-        public string IntroURL { get; set; }
+        [JsonPropertyName("intro")]
+        public ulong IntroID { get; set; }
         
         public User(ulong id)
         {
             UserID = id;
             Authorized = false;
-            IntroURL = string.Empty;
+            IntroID = 0;
+        }
+
+        public User(ulong id, ulong introId)
+        {
+            UserID = id;
+            Authorized = true;
+            IntroID = introId;
         }
 
         public User ()
@@ -28,11 +35,11 @@ namespace SaturnBot.CommandModules.AirLock
             //
         }
 
-        public bool Equals(User obj)
+        public override bool Equals(object obj)
         {
-            if (UserID == obj.UserID)
-                return true;
-            return false;
+            if (obj == null) return false;
+            if (!(obj is User)) return false;
+            return ((User)obj).UserID == this.UserID;
         }
     }
 }
