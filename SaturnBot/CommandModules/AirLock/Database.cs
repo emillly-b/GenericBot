@@ -20,7 +20,6 @@ namespace SaturnBot.CommandModules.AirLock
             Directory.CreateDirectory("./Data");
             Directory.CreateDirectory("./Data/Airlock");
             Directory.CreateDirectory("./Data/Airlock/Guilds");
-            File.Create(dbPath + "Configuration.json");
             File.WriteAllText(dbPath + "Configuration.json", JsonSerializer.Serialize(GetConfiguration(), options));
         }
 
