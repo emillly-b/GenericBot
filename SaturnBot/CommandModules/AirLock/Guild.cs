@@ -12,6 +12,9 @@ namespace SaturnBot.CommandModules.AirLock
         [JsonPropertyName("guildid")]
         public ulong Id { get; set; }
 
+        [JsonPropertyName("airlock-enabled")]
+        public bool Enabled { get; set; }
+
         [JsonPropertyName("delete-intros")]
         public bool DeleteIntros { get; set; }
 
@@ -49,13 +52,18 @@ namespace SaturnBot.CommandModules.AirLock
 
         public User GetUser(ulong id)
         {
-            foreach(User cursor in Members)
-            {
-                var UsertoFind = new User(id);
-                if (cursor == UsertoFind)
+            var UsertoFind = new User(id);
+            foreach (User cursor in Members)
+            {                
+                if (cursor.Equals(UsertoFind))
                     return cursor;
             }
             throw new Exception("User not found");
+        }
+
+        public void UpdateUser(User updated)
+        {
+            Members[Members.IndexOf(updated)] = updated;
         }
         public override bool Equals(object obj)
         {

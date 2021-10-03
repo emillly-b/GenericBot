@@ -15,6 +15,8 @@ namespace SaturnBot.CommandModules.AirLock
         public bool Authorized { get; set; }
         [JsonPropertyName("intro")]
         public ulong IntroID { get; set; }
+        [JsonPropertyName("intoContent")]
+        public string IntoContent { get; set; }
         
         public User(ulong id)
         {

@@ -76,11 +76,14 @@ namespace SaturnBot.CommandModules.AirLock
                 List<User> users = current.Members;
                 var serverGuild = Client.GetGuild(current.Id);
                 var enumerator = serverGuild.GetUsersAsync().Flatten().GetAsyncEnumerator();
-                while(await enumerator.MoveNextAsync())
+                while (await enumerator.MoveNextAsync())
                 {
-                    users.Add(new User(enumerator.Current.Id));
+                    if (!users.Contains(new User(enumerator.Current.Id)))
+                    {
+                        users.Add(new User(enumerator.Current.Id));
+                    }
+                    current.Members = users;
                 }
-                current.Members = users;
             }
         }
 

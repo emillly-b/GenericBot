@@ -1,5 +1,7 @@
 using Discord;
+using Discord.Audio;
 using SaturnBot.Entities;
+using System;
 using System.Collections.Generic;
 
 

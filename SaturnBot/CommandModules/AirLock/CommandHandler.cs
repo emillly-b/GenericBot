@@ -10,8 +10,6 @@ namespace SaturnBot.CommandModules.AirLock
 {
     class CommandHandler : Module
     {
-
-        public bool Enabled { get; set;}
         public List<ulong> MirroredChannels { get; set;}
         public List<Command> Load()
         {
@@ -49,30 +47,49 @@ namespace SaturnBot.CommandModules.AirLock
             {
                 Description = "Airlock Welcome Command",
                 Usage = Core.GetGlobalPrefix() + "welcome @user",
+                Delete = true,
                 RequiredPermission = Command.PermissionLevels.Moderator
             };
             Welcome.ToExecute += async (context) =>
             {
+                if (!Core.Airlock.GetGuild(context.Guild.Id).Enabled)
+                {
+                    context.Channel.TriggerTypingAsync();
+                    context.Channel.SendMessageAsync("Airlock is not enabled in this server!");
+                    return;
+                }
                 if (ulong.TryParse(context.Parameters[0], out ulong id))
                 {
                     var client = Core.Airlock.Client;
                     var guild = Core.Airlock.GetGuild(context.Guild.Id);
-                    var channel = client.GetChannel(guild.SafeChannelId) as IMessageChannel;
+                    var discordGuild = client.GetGuild(context.Guild.Id);
+                    var airlockUser = guild.GetUser(id);
+                    var channel = client.GetChannel(guild.UnsafeChannelId) as IMessageChannel;
+                    var safeChannel = client.GetChannel(guild.SafeChannelId) as IMessageChannel;
                     var enumerator = channel.GetMessagesAsync(100).Flatten().GetAsyncEnumerator();
+                    var guildUserEnum = discordGuild.GetUsersAsync().Flatten().GetAsyncEnumerator();
+                    IGuildUser guildUser = null;
+                    while (await guildUserEnum.MoveNextAsync())
+                    {
+                        if (id == guildUserEnum.Current.Id)
+                            guildUser = guildUserEnum.Current;
+                    }
                     while (await enumerator.MoveNextAsync())
                     {
-                        if(enumerator.Current.Author.Id == id)
+                        if (enumerator.Current.Author.Id == id)
                         {
-                            var airlockUser = guild.GetUser(id);
                             airlockUser.Authorized = true;
                             airlockUser.IntroID = enumerator.Current.Id;
-                            var disGuild = client.GetGuild(context.Guild.Id);
-                            disGuild.GetUser(id).AddRoleAsync(guild.SafeRoleId);
-                            disGuild.GetUser(id).RemoveRoleAsync(guild.UnsafeRoleId);
-                            break;
+                            airlockUser.IntoContent = enumerator.Current.Content;
+                            guildUser.AddRoleAsync(guild.SafeRoleId);
+                            guildUser.RemoveRoleAsync(guild.UnsafeRoleId);
+                            safeChannel.TriggerTypingAsync();
+                            safeChannel.SendMessageAsync("", embed: Utility.GetIntroEmbed(airlockUser, guildUser));
+                            if (guild.DeleteIntros)
+                                enumerator.Current.DeleteAsync();
                         }
-                    }
-                    context.Message.ReplyAsync("User updated.");
+                    }                    
+                    enumerator.DisposeAsync();
                 }
             };
             commands.Add(Welcome);
@@ -85,7 +102,7 @@ namespace SaturnBot.CommandModules.AirLock
                     .WithUrl("https://github.com/emillly-b/SaturnBot")
                     .WithColor(new Color(0xEF4347))
                     .WithFooter(new EmbedFooterBuilder().WithText($"If you have questions or notice any errors, please contact {Core.DiscordClient.GetUser(Core.GetOwnerId()).ToString()}"))
-                    .AddField("Airlock Enabled?:", Enabled);
+                    .AddField("Airlock Enabled?:", Core.Airlock.GetGuild(context.Guild.Id).Enabled);
                 var embed = builder.Build();
 
                 await context.Channel.SendMessageAsync("", embed: embed);
@@ -97,14 +114,15 @@ namespace SaturnBot.CommandModules.AirLock
             {
                 case "enable":
                     context.Message.ReplyAsync("Airlock Enabled");
-                    Enabled = true;
+                    Core.Airlock.GetGuild(currentGuild).Enabled = true;
                     break;
                 case "disable":
                     context.Message.ReplyAsync("Airlock Disabled");
-                    Enabled = false;
+                    Core.Airlock.GetGuild(currentGuild).Enabled = false;
                     break;
                 case "update":
-                    Core.Airlock.UpdateIntros(context);
+                    Core.Airlock.UpdateUsers();
+                    Database.SaveGuilds(Core.Airlock.ActiveGuilds);
                     break;
                 case "show":
                     PrintAirlockConfiguration(context);
@@ -165,7 +183,7 @@ namespace SaturnBot.CommandModules.AirLock
                     .WithUrl("https://github.com/emillly-b/SaturnBot")
                     .WithColor(new Color(0xEF4347))
                     .WithFooter(new EmbedFooterBuilder().WithText($"If you have questions or notice any errors, please contact {Core.DiscordClient.GetUser(Core.GetOwnerId()).ToString()}"))
-                    .AddField("Airlock Enabled?:", Enabled);
+                    .AddField("Airlock Enabled?:", Core.Airlock.GetGuild(context.Guild.Id).Enabled);
                 var embed = builder.Build();
 
                 await context.Channel.SendMessageAsync("", embed: embed);

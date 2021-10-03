@@ -28,7 +28,6 @@ namespace SaturnBot.CommandModules.AirLock
         {
             if (parameterMessage.Author.IsBot) { return; }
             if (parameterMessage.Author.IsWebhook) { return; }
-            SaturnBot.Core.Logger.LogDebugMessage("Airlock Message Recieved" + parameterMessage.Id);
             SocketGuild _guild = parameterMessage.GetGuild();
             if (Core.ActiveGuilds.Count == 0)
             {
